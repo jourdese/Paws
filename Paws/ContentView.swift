@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Vertical Grid Layout
+//  Toolbar
 
 import SwiftUI
 import SwiftData
@@ -60,6 +60,11 @@ struct ContentView: View {
                 } //#GridLayout
             } //#Scrollview
             .navigationTitle(pets.isEmpty ? "" : "Pets")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Add a new pet", systemImage: "plus.circle", action: addPet)
+                }
+            }
             .overlay {
                 if pets.isEmpty {
                     CustomContentUnavailableView(
