@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Save Button
+//  Pet Photo
 import SwiftUI
 import SwiftData
 
@@ -12,6 +12,11 @@ struct EditPetView: View {
     var body: some View {
         Form {
             // MARK: - IMAGE
+            if let imageData = pet.photo {
+                if let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                }
+            }
             
             // MARK: - PHOTO PICKER
             
