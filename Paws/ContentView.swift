@@ -16,6 +16,12 @@ struct ContentView: View {
         GridItem(.flexible(minimum: 120)),
         GridItem(.flexible(minimum: 120))
     ]
+    
+    func addPet() {
+        let pet = Pet(name: "Best")
+        modelContext.insert(pet)
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
