@@ -3,8 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  SwiftUi Form
-
+//  Save Button
 import SwiftUI
 import SwiftData
 
@@ -23,6 +22,17 @@ struct EditPetView: View {
                 .padding(.vertical)
             
             // MARK: - BUTTON
+            Button{
+                
+            } label: {
+                Text("Save")
+                    .font(.title3.weight(.medium))
+                    .padding(8)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .listRowSeparator(.hidden)
+            .padding(.bottom)
             
         } //FORM
         .listStyle(.plain)
