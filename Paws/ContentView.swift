@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Toolbar
+//  Navigation System
 
 import SwiftUI
 import SwiftData
@@ -11,6 +11,8 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var pets: [Pet]
+    
+    @State private var path = [Pet]()
     
     let layout = [
         GridItem(.flexible(minimum: 120)),
@@ -20,15 +22,16 @@ struct ContentView: View {
     func addPet() {
         let pet = Pet(name: "Best")
         modelContext.insert(pet)
+        path = [pet]
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 LazyVGrid(columns: layout){
                     GridRow {
                         ForEach(pets) {
-                            pet in NavigationLink(destination: EmptyView()){
+                            pet in NavigationLink(value: pet){
                                 VStack {
                                     if let imageData = pet.photo {
                                         if let image = UIImage(data: imageData) {
@@ -60,6 +63,7 @@ struct ContentView: View {
                 } //#GridLayout
             } //#Scrollview
             .navigationTitle(pets.isEmpty ? "" : "Pets")
+            .navigationDestination(for: Pet.self, destination: EditPetView.init)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add a new pet", systemImage: "plus.circle", action: addPet)
