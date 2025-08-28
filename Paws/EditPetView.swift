@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//
+//  SwiftUi Form
 
 import SwiftUI
 import SwiftData
@@ -11,7 +11,23 @@ import SwiftData
 struct EditPetView: View {
     @Bindable var pet: Pet
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            // MARK: - IMAGE
+            
+            // MARK: - PHOTO PICKER
+            
+            // MARK: - TEXT FIELD
+            TextField("Name", text: $pet.name)
+                .textFieldStyle(.roundedBorder)
+                .font(.largeTitle.weight(.light))
+                .padding(.vertical)
+            
+            // MARK: - BUTTON
+            
+        } //FORM
+        .listStyle(.plain)
+        .navigationTitle("Edit \(pet.name)")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
