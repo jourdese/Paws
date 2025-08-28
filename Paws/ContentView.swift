@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Navigation System
+//  Layout Design
 
 import SwiftUI
 import SwiftData
@@ -36,6 +36,9 @@ struct ContentView: View {
                                     if let imageData = pet.photo {
                                         if let image = UIImage(data: imageData) {
                                             Image(uiImage: image)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .circular))
                                         }
                                     } else {
                                         Image(systemName: "pawprint.circle")
