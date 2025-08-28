@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Layout Design
+//  Toolbar button
 
 import SwiftUI
 import SwiftData
@@ -13,6 +13,7 @@ struct ContentView: View {
     @Query private var pets: [Pet]
     
     @State private var path = [Pet]()
+    @State private var isEditing: Bool = false
     
     let layout = [
         GridItem(.flexible(minimum: 120)),
@@ -68,6 +69,16 @@ struct ContentView: View {
             .navigationTitle(pets.isEmpty ? "" : "Pets")
             .navigationDestination(for: Pet.self, destination: EditPetView.init)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        withAnimation {
+                            isEditing.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add a new pet", systemImage: "plus.circle", action: addPet)
                 }
