@@ -3,7 +3,7 @@
 //  Paws
 //
 //  Created by Jourdese Palacio on 8/28/25.
-//  Toolbar button
+//  Delete button
 
 import SwiftUI
 import SwiftData
@@ -21,6 +21,7 @@ struct ContentView: View {
     ]
     
     func addPet() {
+        isEditing = false
         let pet = Pet(name: "Best")
         modelContext.insert(pet)
         path = [pet]
@@ -53,13 +54,32 @@ struct ContentView: View {
                                     Text(pet.name)
                                         .font(.title.weight(.light))
                                         .padding(.vertical)
-                                    
                                     Spacer()
                                 } //#VStack
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0,
                                     maxHeight: .infinity)
                                 .background(.ultraThinMaterial)
                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .circular))
+                                .overlay(alignment: .topTrailing) {
+                                    if isEditing {
+                                        Menu {
+                                            Button(role: .destructive) {
+                                                modelContext.delete(pet)
+                                                try? modelContext.save()
+                                            } label: {
+                                                Label("Delete", systemImage: "trash")
+                                            }
+                                        } label : {
+                                            Image(systemName: "trash.circle.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 36, height: 36)
+                                                .foregroundStyle(.red)
+                                                .symbolRenderingMode(.multicolor)
+                                                .padding()
+                                        }
+                                    }
+                                }
                             } //#NavigationLink
                             .foregroundStyle(.primary)
                         } //#Loop
